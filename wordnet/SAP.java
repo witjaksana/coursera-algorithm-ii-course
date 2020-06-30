@@ -44,6 +44,9 @@ public class SAP {
     }
 
     private int[] shortest(int v, int w) {
+        if (v < 0 || v >= G.V() || w < 0 || w >= G.V())
+            throw new IllegalArgumentException("Bad argument");
+
         int[] result = new int[2];
         DeluxeBFS vDeluxeBFS = new DeluxeBFS(G, v);
         DeluxeBFS wDeluxeBFS = new DeluxeBFS(G, w);
@@ -74,6 +77,9 @@ public class SAP {
     }
 
     private int[] shortest(Iterable<Integer> v, Iterable<Integer> w) {
+        if (v == null || w == null)
+            throw new IllegalArgumentException("Bad argument");
+
         int[] result = new int[2];
         int shortestLength = Integer.MAX_VALUE;
         int shortestAncestor = Integer.MAX_VALUE;
@@ -102,12 +108,16 @@ public class SAP {
 
     // length of shortest ancestral path between v and w; -1 if no such path
     public int length(int v, int w) {
+        if (v < 0 || v >= G.V() || w < 0 || w >= G.V())
+            throw new IllegalArgumentException("Bad argument");
         int[] res = shortest(v, w);
         return res[0];
     }
 
     // a common ancestor of v and w that participates in a shortest ancestral path; -1 if no such path
     public int ancestor(int v, int w) {
+        if (v < 0 || v >= G.V() || w < 0 || w >= G.V())
+            throw new IllegalArgumentException("Bad argument");
         int[] res = shortest(v, w);
         return res[1];
     }

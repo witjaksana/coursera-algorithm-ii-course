@@ -87,9 +87,11 @@ public class WordNet {
                 G.addEdge(idx, Integer.parseInt(line[i]));
         }
         hypernymsFile.close();
+
         DirectedCycle dc = new DirectedCycle(G);
+
         if (dc.hasCycle())
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Graph is not DAG!");
 
         sap = new SAP(G);
     }
